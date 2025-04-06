@@ -1,9 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:islami_app_new/utils/app_images.dart';
 
 import '../../../models/hadith_model.dart';
-import '../../app_colors.dart';
+import '../../../utils/app_colors.dart';
 import 'hadith_details_screen.dart';
 
 class HadithTab extends StatefulWidget {
@@ -22,7 +23,7 @@ class _HadithTabState extends State<HadithTab> {
     return Container(
       child: Column(
         children: [
-          Image.asset("assets/images/bar.png"),
+          Image.asset(AppImages.bar),
           hadithList.isEmpty
               ? CircularProgressIndicator(color: AppColor.gold)
               : CarouselSlider.builder(
@@ -54,7 +55,7 @@ class _HadithTabState extends State<HadithTab> {
                               image: DecorationImage(
                                 fit: BoxFit.fill,
                                 image: AssetImage(
-                                  "assets/images/hadith_background_nv.png",
+                                  AppImages.hadithItemBG,
                                 ),
                               ),
                             ),

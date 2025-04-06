@@ -1,8 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:islami_app_new/utils/app_images.dart';
 
-import '../../app_colors.dart';
+import '../../../utils/app_colors.dart';
 
 class SebhaTab extends StatefulWidget {
   @override
@@ -17,7 +18,7 @@ class _SebhaTabState extends State<SebhaTab> {
   List<String> azkar2 = [
     'وَسَبِّحُوهُ بُكْرَةً وَأَصِيلًا ',
     'وَإِن تَعُدُّواْ نِعْمَةَ اللّهِ لاَ تُحْصُوهاِ',
-    'ولِتُكَبِّرُوا اللَّهَ عَلَى مَا هَدَاكُمْو'
+    'ولِتُكَبِّرُوا اللَّهَ عَلَى مَا هَدَاكُمْ'
   ];
 
   bool isMainStyle = true;
@@ -34,66 +35,68 @@ class _SebhaTabState extends State<SebhaTab> {
         .of(context)
         .size
         .width;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Image.asset("assets/images/bar.png"),
-        Text(azkar2[index],
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            color: AppColor.white,
-            fontSize: 36,
-            fontWeight: FontWeight.bold,),
-        ),
-        SizedBox(height: height * .02,),
-        isMainStyle ? Stack(
-          alignment: Alignment.topCenter,
-          children: [
-            Image.asset("assets/images/head.png"),
-            Padding(
-              padding: EdgeInsets.only(top: height * .08),
-              child: Transform.rotate(
-                  angle: angle,
-                  child: Image.asset("assets/images/body.png")),
-            ),
-            Positioned(
-              top: height * .18,
-              child: Column(
-                children: [
-                  Text(counter.toString(), style: TextStyle(
-                    color: AppColor.white,
-                    fontSize: 36,
-                    fontWeight: FontWeight.bold,
-                  ),),
-                  SizedBox(height: height * .04,),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.transparent
-                    ),
-                    onPressed: onTap,
-                    child: Text(azkar[index], style:
-                    TextStyle(fontSize: 50, color: AppColor.white),),),
-                  SizedBox(height: height * .02,),
-                ],
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Image.asset(AppImages.bar),
+          Text(azkar2[index],
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: AppColor.white,
+              fontSize: 36,
+              fontWeight: FontWeight.bold,),
+          ),
+          SizedBox(height: height * .04,),
+          isMainStyle ? Stack(
+            alignment: Alignment.topCenter,
+            children: [
+              Image.asset(AppImages.sebhaHead),
+              Padding(
+                padding: EdgeInsets.only(top: height * .08),
+                child: Transform.rotate(
+                    angle: angle,
+                    child: Image.asset(AppImages.sebhaBody)),
               ),
-            ),
-          ],
-        )
-            : sebhaStyleTwo(width, height),
-        Container(
-            margin: EdgeInsets.symmetric(
-                vertical: height * .015,
-                horizontal: width * .15),
-            child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColor.brown
+              Positioned(
+                top: height * .18,
+                child: Column(
+                  children: [
+                    Text(counter.toString(), style: TextStyle(
+                      color: AppColor.white,
+                      fontSize: 36,
+                      fontWeight: FontWeight.bold,
+                    ),),
+                    SizedBox(height: height * .04,),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.transparent
+                      ),
+                      onPressed: onTap,
+                      child: Text(azkar[index], style:
+                      TextStyle(fontSize: 50, color: AppColor.white),),),
+                    SizedBox(height: height * .02,),
+                  ],
                 ),
-                onPressed: changeStyle,
-                child: Text("Change Style", style: TextStyle(
-                    fontSize: 25,
-                    color: AppColor.white
-                ),))),
-      ],
+              ),
+            ],
+          )
+              : sebhaStyleTwo(width, height),
+          Container(
+              margin: EdgeInsets.symmetric(
+                  vertical: height * .015,
+                  horizontal: width * .15),
+              child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColor.brown
+                  ),
+                  onPressed: changeStyle,
+                  child: Text("Change Style", style: TextStyle(
+                      fontSize: 25,
+                      color: AppColor.white
+                  ),))),
+        ],
+      ),
     );
   }
 
@@ -101,7 +104,7 @@ class _SebhaTabState extends State<SebhaTab> {
     return Center(
       child: SizedBox(
         width: width * 1,
-        height: height * .9,
+        height: height * 1,
         child: Stack(
           alignment: Alignment.center,
           children: [
@@ -111,7 +114,7 @@ class _SebhaTabState extends State<SebhaTab> {
                 double radius = 180;
                 return Positioned(
                   left: width * .24 + radius * cos(angle) - 15,
-                  top: height * .45 + radius * sin(angle) - 15,
+                  top: height * .5 + radius * sin(angle) - 15,
                   child: CircleAvatar(
                     radius: 15,
                     backgroundColor: index < litCount

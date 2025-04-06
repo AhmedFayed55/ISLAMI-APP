@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:islami_app_new/home/app_colors.dart';
 import 'package:islami_app_new/provider/radio_manager_provider.dart';
+import 'package:islami_app_new/utils/app_colors.dart';
+import 'package:islami_app_new/utils/app_images.dart';
 import 'package:provider/provider.dart';
 
 class RadioItem extends StatefulWidget {
@@ -28,7 +29,7 @@ class _RadioItemState extends State<RadioItem> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             image: DecorationImage(
-              image: AssetImage("assets/images/radio_back_nv1.png"),
+              image: AssetImage(AppImages.radioItemBG),
               fit: BoxFit.fill,
             ),
           ),

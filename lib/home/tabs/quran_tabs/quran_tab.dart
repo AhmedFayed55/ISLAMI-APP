@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:islami_app_new/home/tabs/quran_tabs/sura_details.dart';
 import 'package:islami_app_new/home/tabs/quran_tabs/suras_list.dart';
+import 'package:islami_app_new/utils/app_images.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../models/sura_model.dart';
-import '../../app_colors.dart';
+import '../../../utils/app_colors.dart';
 
 class QuranTab extends StatefulWidget {
   @override
@@ -40,7 +41,7 @@ class _QuranTabState extends State<QuranTab> {
 
   List<SuraModel> filterList = SuraModel.suraList; //114
   String searchText = '';
-  Map<String, String> loadSuraList = {};
+  Map<String, String> lastSura = {};
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +52,7 @@ class _QuranTabState extends State<QuranTab> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Image.asset("assets/images/bar.png"),
+            Image.asset(AppImages.bar),
             TextField(
               style: TextStyle(color: AppColor.white),
               cursorColor: AppColor.white,
@@ -60,7 +61,7 @@ class _QuranTabState extends State<QuranTab> {
                 hintStyle: TextStyle(color: AppColor.white),
                 prefixIcon: ImageIcon(
                   color: AppColor.gold,
-                  AssetImage("assets/images/search_icon.png"),
+                  AssetImage(AppImages.searchIcon),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15),
@@ -104,6 +105,11 @@ class _QuranTabState extends State<QuranTab> {
                   itemBuilder: (context, index) {
                     return InkWell(
                       onTap: () {
+                        //save data
+                        saveLastSura(
+                            suraEnName: filterList[index].suraArName,
+                            suraArName: filterList[index].suraEnName,
+                            numOfVerses: filterList[index].ayasNum);
                         Navigator.of(context).pushNamed(
                           SuraDetailsScreen.routeName,
                           arguments: filterList[index],
@@ -128,7 +134,8 @@ class _QuranTabState extends State<QuranTab> {
   Widget text(String text, double font) {
     return Text(
       text,
-      style: TextStyle(fontSize: font, fontWeight: FontWeight.bold),
+      style: TextStyle(
+          fontSize: font, fontWeight: FontWeight.bold, color: AppColor.black),
     );
   }
 
@@ -142,21 +149,21 @@ class _QuranTabState extends State<QuranTab> {
         ),
         SizedBox(height: 10),
         GestureDetector(
-          // أو يمكنك استخدام InkWell
           onTap: () {
-            if (loadSuraList['suraEnName'] != null &&
-                loadSuraList['suraArName'] != null &&
-                loadSuraList['numOfVerses'] != null) {
+            if (lastSura['suraEnName'] != null &&
+                lastSura['suraArName'] != null &&
+                lastSura['numOfVerses'] != null) {
               Navigator.of(context).pushNamed(
                 SuraDetailsScreen.routeName,
                 arguments: SuraModel(
-                  suraEnName: loadSuraList['suraEnName']!,
-                  suraArName: loadSuraList['suraArName']!,
+                  suraEnName: lastSura['suraEnName']!,
+                  suraArName: lastSura['suraArName']!,
                   ayasNum:
-                      (int.tryParse(loadSuraList['numOfVerses'] ?? '0') ?? 0)
+                  (int.tryParse(lastSura['numOfVerses'] ?? '0') ?? 0)
                           .toString(),
                   fileName:
-                      "${SuraModel.suraEnList.indexOf(loadSuraList['suraEnName']!) + 2}.txt",
+                  "${SuraModel.suraEnList.indexOf(lastSura['suraEnName']!) +
+                      2}.txt",
                 ),
               );
             }
@@ -172,12 +179,12 @@ class _QuranTabState extends State<QuranTab> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    text(loadSuraList['suraArName'] ?? '', 24),
-                    text(loadSuraList['suraEnName'] ?? '', 24),
-                    text("${loadSuraList['numOfVerses']} verses", 14),
+                    text(lastSura['suraArName'] ?? '', 22),
+                    text(lastSura['suraEnName'] ?? '', 22),
+                    text("${lastSura['numOfVerses']} verses", 14),
                   ],
                 ),
-                Image.asset("assets/images/quran3.png"),
+                Image.asset(AppImages.mostRecentlyQuran),
               ],
             ),
           ),
@@ -186,19 +193,19 @@ class _QuranTabState extends State<QuranTab> {
     );
   }
 
-  saveLastSura({
+  Future<void> saveLastSura({
     required String suraEnName,
     required String suraArName,
     required String numOfVerses,
   }) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString("suraEnName", suraEnName);
-    prefs.setString("suraArName", suraArName);
-    prefs.setString("numOfVerses", numOfVerses);
-    await loadLastSura();
+    await prefs.setString("suraEnName", suraEnName);
+    await prefs.setString("suraArName", suraArName);
+    await prefs.setString("numOfVerses", numOfVerses);
+    await loadLastSura(); // update after reload
   }
 
-  getLastSura() async {
+  Future<Map<String, String>> getLastSura() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     String suraEnName = prefs.getString("suraEnName") ?? '';
     String suraArName = prefs.getString("suraArName") ?? '';
@@ -211,7 +218,7 @@ class _QuranTabState extends State<QuranTab> {
   }
 
   loadLastSura() async {
-    loadSuraList = await getLastSura();
+    lastSura = await getLastSura();
     setState(() {});
   }
 }

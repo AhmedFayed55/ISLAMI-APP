@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:islami_app_new/utils/app_images.dart';
 
 import '../../../models/hadith_model.dart';
-import '../../app_colors.dart';
+import '../../../utils/app_colors.dart';
 
 class HadithDetailsScreen extends StatelessWidget {
   static const String routeName = "hadith_details";
@@ -20,7 +21,7 @@ class HadithDetailsScreen extends StatelessWidget {
           Container(
             color: AppColor.black,
             child: Image.asset(
-              "assets/images/decoration_nv.png",
+              AppImages.detailsScreenDecoration,
               width: double.infinity,
               height: double.infinity,
               fit: BoxFit.fill,
