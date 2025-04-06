@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:islami_app_new/home/tabs/quran_tabs/sura_content_item.dart';
+import 'package:islami_app_new/utils/app_images.dart';
 
 import '../../../models/sura_model.dart';
-import '../../app_colors.dart';
+import '../../../utils/app_colors.dart';
 
 class SuraDetailsScreen extends StatefulWidget {
   static const String routeName = "sura_details_screen";
@@ -18,6 +19,9 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery
+        .of(context)
+        .size;
     var args = ModalRoute.of(context)?.settings.arguments as SuraModel;
     if (verses.isEmpty) {
       loadSuraFile(args.fileName);
@@ -35,7 +39,7 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
           Container(
             color: AppColor.black,
             child: Image.asset(
-              "assets/images/decoration_nv.png",
+              AppImages.detailsScreenDecoration,
               width: double.infinity,
               height: double.infinity,
               fit: BoxFit.fill,
@@ -73,7 +77,7 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
                             );
                           },
                           itemCount: verses.length,
-                        ),
+                    )
               ),
             ],
           ),
@@ -95,4 +99,5 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
       print("Error loading sura file: $e");
     }
   }
+
 }

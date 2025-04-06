@@ -3,9 +3,10 @@ import 'package:islami_app_new/home/tabs/hadith_tab/hadith_tab.dart';
 import 'package:islami_app_new/home/tabs/quran_tabs/quran_tab.dart';
 import 'package:islami_app_new/home/tabs/radio_tab/radio_tab.dart';
 import 'package:islami_app_new/home/tabs/sebha_tab/sebha_tab.dart';
-import 'package:islami_app_new/home/tabs/timer_tab/timer_tab.dart';
+import 'package:islami_app_new/home/tabs/timer_tab/timer_tab1.dart';
+import 'package:islami_app_new/utils/app_images.dart';
 
-import 'app_colors.dart';
+import '../utils/app_colors.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = "home_screen";
@@ -17,18 +18,18 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
   List<String> backgroundImages = [
-    "assets/images/quran_background.png",
-    "assets/images/hadith_background.png",
-    "assets/images/sebha_background.png",
-    "assets/images/radio_background.png",
-    "assets/images/timer_background.png",
+    AppImages.quranBG,
+    AppImages.hadithBG,
+    AppImages.sebhaBG,
+    AppImages.radioBG,
+    AppImages.timerBG,
   ];
   List<Widget> tabs = [
     QuranTab(),
     HadithTab(),
     SebhaTab(),
     RadioTab(),
-    TimerTab(),
+    TimerTabTwo()
   ];
 
   @override

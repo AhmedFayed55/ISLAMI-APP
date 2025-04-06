@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:islami_app_new/utils/app_images.dart';
 
 import '../../../models/sura_model.dart';
-import '../../app_colors.dart';
+import '../../../utils/app_colors.dart';
 
 class SurasList extends StatelessWidget {
   SuraModel suraModel;
@@ -16,7 +17,7 @@ class SurasList extends StatelessWidget {
         Stack(
           alignment: Alignment.center,
           children: [
-            Image.asset("assets/images/shape.png"),
+            Image.asset(AppImages.suraNumberFrame),
             Text("${index + 1}", style: TextStyle(color: AppColor.white)),
           ],
         ),

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:islami_app_new/api/api_manager.dart';
-import 'package:islami_app_new/home/app_colors.dart';
 import 'package:islami_app_new/home/tabs/radio_tab/radio_item.dart';
 import 'package:islami_app_new/models/radio_response_model.dart';
 import 'package:islami_app_new/models/reciters_response_model.dart';
+import 'package:islami_app_new/utils/app_colors.dart';
+import 'package:islami_app_new/utils/app_images.dart';
 
 class RadioTab extends StatefulWidget {
   const RadioTab({super.key});
@@ -31,7 +32,7 @@ class _RadioTabState extends State<RadioTab> {
           child: Column(
             spacing: height * .02,
             children: [
-              Image.asset("assets/images/bar.png"),
+              Image.asset(AppImages.bar),
               Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
