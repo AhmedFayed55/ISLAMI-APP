@@ -1,16 +1,21 @@
-# islami_app_new
+📱 Flutter App Overview
 
-A new Flutter project.
+🚀 Features & Technologies Used ✅ Splash Screen Setup Configured a custom splash screen using the flutter_native_splash package to enhance the initial app experience.
 
-## Getting Started
+✅ Custom Introduction Screen Designed and implemented an introduction/onboarding screen from scratch to guide users through the app’s features.
 
-This project is a starting point for a Flutter application.
+✅ State Management with Provider Managed the app's state efficiently using the Provider package, along with reading and handling data from local files.
 
-A few resources to get you started if this is your first Flutter project:
+✅ Local Storage with SharedPreferences Used SharedPreferences to save and retrieve user preferences locally — for example, storing the most recently opened Surah so users can easily resume from where they left off.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+✅ Loaded and parsed local JSON files to display Quranic verses, Hadiths, and Azkar content within the app, enabling offline access and fast rendering.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+✅ HTTP Requests & Real-Time Data Fetched real-time content by making HTTP requests to:
+
+📻 A Radio API for streaming data
+
+🕌 A Prayer Times API for up-to-date prayer time information
+
+
+https://github.com/user-attachments/assets/04553356-67a8-4f2a-a828-93ba5d13f91c
+
